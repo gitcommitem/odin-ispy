@@ -1,6 +1,12 @@
 div#bottom-bar {
   justify-content: space-between;
   gap: 5rem;
+  background-color: #fafafa;
+  position: fixed;
+  bottom: 0;
+  padding: 1rem 50vw;
+  margin-left: -50vw;
+  margin-right: -50vw;
 }
 
 div#item-cont {
