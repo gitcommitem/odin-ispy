@@ -1,3 +1,4 @@
+import '../styles/BottomBar.css';
 import Timer from './Timer';
 import pigImg from '../imgs/item1.png';
 import greenDieImg from '../imgs/item2.png';
@@ -51,8 +52,10 @@ itemsList.forEach(item => {
 
 const BottomBar = () => {
   return (
-    <div>
-      <div>{generatedItems}</div>
+    <div className='hflex' id='bottom-bar'>
+      <div className='hflex' id='item-cont'>
+        {generatedItems}
+      </div>
       <Timer />
     </div>
   );

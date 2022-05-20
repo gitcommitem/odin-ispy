@@ -1,0 +1,8 @@
+img.item-img {
+  width: 70%;
+  border-radius: 2rem;
+}
+
+div.item > p {
+  margin-left: -1rem;
+}

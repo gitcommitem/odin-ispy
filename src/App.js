@@ -5,9 +5,9 @@ import BottomBar from './components/BottomBar';
 
 function App () {
   return (
-    <div>
+    <div id='page-cont'>
       <StartPrompt />
-      <img src={gameImg} />
+      <img className='blur' id='game' src={gameImg} />
       <BottomBar />
     </div>
   );

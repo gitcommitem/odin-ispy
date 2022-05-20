@@ -1,7 +1,9 @@
 const Timer = () => {
   return (
     <div>
-      <span>00</span>:<span>00</span>:<span>00</span>
+      <h1>
+        <span>00</span>:<span>00</span>:<span>00</span>
+      </h1>
     </div>
   );
 };

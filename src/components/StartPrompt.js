@@ -1,6 +1,8 @@
+import '../styles/StartPrompt.css';
+
 const StartPrompt = () => {
   return (
-    <div>
+    <div id='start-prompt'>
       <p>Find the items listed below as quickly as possible.</p>
       <button>Start Game</button>
       <p>Credits</p>

@@ -1,7 +1,11 @@
+import '../styles/Item.css';
+
 const Item = ({ imgSrc, itemName }) => {
   return (
-    <div>
-      <img src={imgSrc} />
+    <div className='item vcenter'>
+      <div>
+        <img className='item-img' src={imgSrc} />
+      </div>
       <p>{itemName}</p>
     </div>
   );

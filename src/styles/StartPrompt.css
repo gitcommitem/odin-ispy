@@ -1,0 +1,11 @@
+div#start-prompt {
+  position: absolute;
+  top: 45vh;
+  z-index: 1;
+}
+
+div#start-prompt > button {
+  padding: 0.5rem 1rem;
+  border-radius: 2rem;
+  border: none;
+}
