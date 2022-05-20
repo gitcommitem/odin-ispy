@@ -1,11 +1,11 @@
 import '../styles/StartPrompt.css';
 
-const StartPrompt = () => {
+const StartPrompt = ({ hidePrompt, handleButtonClick }) => {
   return (
-    <div className="start-cont center">
+    <div className={hidePrompt ? 'hidden' : 'start-cont center'}>
       <div id="start-prompt">
         <p>Find the items listed below as quickly as possible.</p>
-        <button>Start Game</button>
+        <button onClick={handleButtonClick}>Start Game</button>
         <p>Credits</p>
         <p>
           Photo by{' '}
