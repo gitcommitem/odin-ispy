@@ -52,8 +52,8 @@ itemsList.forEach(item => {
 
 const BottomBar = () => {
   return (
-    <div className='hflex' id='bottom-bar'>
-      <div className='hflex' id='item-cont'>
+    <div className="hflex" id="bottom-bar">
+      <div className="hflex" id="item-cont">
         {generatedItems}
       </div>
       <Timer />
