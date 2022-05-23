@@ -12,6 +12,32 @@ function App () {
     setGameStart(true);
   };
 
+  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
+
+  const handleGameImgClick = event => {
+    const image = event.target;
+
+    const bounds = image.getBoundingClientRect();
+    const left = bounds.left;
+    const top = bounds.top;
+
+    //getBoundingClient is relative to viewport
+    //so need to account for scroll
+    const x = event.pageX - left - window.scrollX;
+    const y = event.pageY - top - window.scrollY;
+
+    const clientWidth = image.clientWidth;
+    const clientHeight = image.clientHeight;
+
+    const originalWidth = image.naturalWidth;
+    const originalHeight = image.naturalHeight;
+
+    const positionX = Math.round((x / clientWidth) * originalWidth);
+    const positionY = Math.round((y / clientHeight) * originalHeight);
+
+    setCursorPosition({ x: positionX, y: positionY });
+  };
+
   return (
     <div id="page-cont">
       <Cursor />
@@ -20,7 +46,12 @@ function App () {
         handleButtonClick={handleStartButtonClick}
       />
       <div className="center" id="game-cont">
-        <img className={isGameStart ? '' : 'blur'} id="game" src={gameImg} />
+        <img
+          onClick={handleGameImgClick}
+          className={isGameStart ? '' : 'blur'}
+          id="game"
+          src={gameImg}
+        />
       </div>
       <BottomBar />
     </div>
