@@ -35,6 +35,7 @@ function App () {
 
   const handleStartButtonClick = () => {
     setGameStart(true);
+    document.body.style.cursor = 'none';
   };
 
   const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
@@ -65,7 +66,7 @@ function App () {
 
   return (
     <div id="page-cont">
-      <Cursor />
+      <Cursor isGameStart={isGameStart} />
       <StartPrompt
         hidePrompt={isGameStart}
         handleButtonClick={handleStartButtonClick}

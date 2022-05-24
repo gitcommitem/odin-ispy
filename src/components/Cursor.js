@@ -1,7 +1,7 @@
 import '../styles/Cursor.css';
 import { useEffect } from 'react';
 
-const Cursor = () => {
+const Cursor = ({ isGameStart }) => {
   useEffect(() => {
     addEventListeners();
     return () => removeEventListeners();
@@ -51,7 +51,7 @@ const Cursor = () => {
     cursor.style.opacity = '1';
   };
 
-  return <div className="cursor"></div>;
+  return <div className={isGameStart ? 'cursor' : 'hidden'}></div>;
 };
 
 export default Cursor;
