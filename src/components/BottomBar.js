@@ -50,13 +50,13 @@ itemsList.forEach(item => {
   );
 });
 
-const BottomBar = () => {
+const BottomBar = ({ isGameStart, isGameEnd }) => {
   return (
     <div className="hflex" id="bottom-bar">
       <div className="hflex" id="item-cont">
         {generatedItems}
       </div>
-      <Timer />
+      <Timer isGameStart={isGameStart} isGameEnd={isGameEnd} />
     </div>
   );
 };

@@ -31,6 +31,7 @@ const db = getFirestore(app);
 
 function App () {
   const [isGameStart, setGameStart] = useState(false);
+  const [isGameEnd, setGameEnd] = useState(false);
 
   const handleStartButtonClick = () => {
     setGameStart(true);
@@ -77,7 +78,7 @@ function App () {
           src={gameImg}
         />
       </div>
-      <BottomBar />
+      <BottomBar isGameStart={isGameStart} isGameEnd={isGameEnd} />
     </div>
   );
 }
