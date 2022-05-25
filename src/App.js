@@ -38,8 +38,6 @@ function App () {
     document.body.style.cursor = 'none';
   };
 
-  const [cursorPosition, setCursorPosition] = useState({ x: 0, y: 0 });
-
   const handleGameImgClick = event => {
     const image = event.target;
 
@@ -61,7 +59,127 @@ function App () {
     const positionX = Math.round((x / clientWidth) * originalWidth);
     const positionY = Math.round((y / clientHeight) * originalHeight);
 
-    setCursorPosition({ x: positionX, y: positionY });
+    checkPosition(positionX, positionY);
+  };
+
+  const checkPosition = (x, y) => {
+    const offset = 22;
+
+    const item1X = 428;
+    const item1Y = 217;
+
+    const item2X = 1500;
+    const item2Y = 802;
+
+    const item3X = 1113;
+    const item3Y = 149;
+
+    const item4X = 1018;
+    const item4Y = 299;
+
+    const item5X = 269;
+    const item5Y = 588;
+
+    const item6X = 686;
+    const item6Y = 622;
+
+    const coordKey = [
+      {
+        id: 1,
+        lowX: item1X - offset,
+        highX: item1X + offset,
+        lowY: item1Y - offset,
+        highY: item1Y + offset
+      },
+      {
+        id: 2,
+        lowX: item2X - offset,
+        highX: item2X + offset,
+        lowY: item2Y - offset,
+        highY: item2Y + offset
+      },
+      {
+        id: 3,
+        lowX: item3X - offset,
+        highX: item3X + offset,
+        lowY: item3Y - offset,
+        highY: item3Y + offset
+      },
+      {
+        id: 4,
+        lowX: item4X - offset,
+        highX: item4X + offset,
+        lowY: item4Y - offset,
+        highY: item4Y + offset
+      },
+      {
+        id: 5,
+        lowX: item5X - offset,
+        highX: item5X + offset,
+        lowY: item5Y - offset,
+        highY: item5Y + offset
+      },
+      {
+        id: 6,
+        lowX: item6X - offset,
+        highX: item6X + offset,
+        lowY: item6Y - offset,
+        highY: item6Y + offset
+      }
+    ];
+
+    //If user clicks within target boundaries access firestore to validate
+    if (
+      coordKey[0].lowX < x &&
+      x < coordKey[0].highX &&
+      coordKey[0].lowY < y &&
+      y < coordKey[0].highY
+    ) {
+      //Get document for pig
+      console.log('pig');
+    } else if (
+      coordKey[1].lowX < x &&
+      x < coordKey[1].highX &&
+      coordKey[1].lowY < y &&
+      y < coordKey[1].highY
+    ) {
+      //Get document for green die
+      console.log('green die');
+    } else if (
+      coordKey[2].lowX < x &&
+      x < coordKey[2].highX &&
+      coordKey[2].lowY < y &&
+      y < coordKey[2].highY
+    ) {
+      //Get document for triangle
+      console.log('triangle');
+    } else if (
+      coordKey[3].lowX < x &&
+      x < coordKey[3].highX &&
+      coordKey[3].lowY < y &&
+      y < coordKey[3].highY
+    ) {
+      //Get document for multi die
+      console.log('multi');
+    } else if (
+      coordKey[4].lowX < x &&
+      x < coordKey[4].highX &&
+      coordKey[4].lowY < y &&
+      y < coordKey[4].highY
+    ) {
+      //Get document for wood tile
+      console.log('tile');
+    } else if (
+      coordKey[5].lowX < x &&
+      x < coordKey[5].highX &&
+      coordKey[5].lowY < y &&
+      y < coordKey[5].highY
+    ) {
+      //Get document for rectangle
+      console.log('rect');
+    } else {
+      alert('Keep looking 👀');
+    }
   };
 
   return (
