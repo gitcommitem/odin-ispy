@@ -1,8 +1,8 @@
 import '../styles/Item.css';
 
-const Item = ({ imgSrc, itemName }) => {
+const Item = ({ imgSrc, itemName, itemId }) => {
   return (
-    <div className="item vcenter">
+    <div className="item vcenter" id={itemId}>
       <div>
         <img className="item-img" src={imgSrc} />
       </div>

@@ -6,7 +6,8 @@ import Cursor from './components/Cursor';
 import React, { useState } from 'react';
 
 import { initializeApp } from 'firebase/app';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, collection } from 'firebase/firestore';
+import { useCollection } from 'react-firebase-hooks/firestore';
 
 const firebaseConfig = {
   apiKey: 'AIzaSyDUWg0z-qQLTn6DKLdBUsXJ93ie1orolao',
@@ -32,6 +33,7 @@ const db = getFirestore(app);
 function App () {
   const [isGameStart, setGameStart] = useState(false);
   const [isGameEnd, setGameEnd] = useState(false);
+  const [foundItems, setFoundItems] = useState([]);
 
   const handleStartButtonClick = () => {
     setGameStart(true);
@@ -60,6 +62,7 @@ function App () {
     const positionY = Math.round((y / clientHeight) * originalHeight);
 
     checkPosition(positionX, positionY);
+    checkGameEnd();
   };
 
   const checkPosition = (x, y) => {
@@ -136,7 +139,7 @@ function App () {
       y < coordKey[0].highY
     ) {
       //Get document for pig
-      console.log('pig');
+      checkData(0, x, y);
     } else if (
       coordKey[1].lowX < x &&
       x < coordKey[1].highX &&
@@ -144,7 +147,7 @@ function App () {
       y < coordKey[1].highY
     ) {
       //Get document for green die
-      console.log('green die');
+      checkData(1, x, y);
     } else if (
       coordKey[2].lowX < x &&
       x < coordKey[2].highX &&
@@ -152,7 +155,7 @@ function App () {
       y < coordKey[2].highY
     ) {
       //Get document for triangle
-      console.log('triangle');
+      checkData(2, x, y);
     } else if (
       coordKey[3].lowX < x &&
       x < coordKey[3].highX &&
@@ -160,7 +163,7 @@ function App () {
       y < coordKey[3].highY
     ) {
       //Get document for multi die
-      console.log('multi');
+      checkData(3, x, y);
     } else if (
       coordKey[4].lowX < x &&
       x < coordKey[4].highX &&
@@ -168,7 +171,7 @@ function App () {
       y < coordKey[4].highY
     ) {
       //Get document for wood tile
-      console.log('tile');
+      checkData(4, x, y);
     } else if (
       coordKey[5].lowX < x &&
       x < coordKey[5].highX &&
@@ -176,9 +179,30 @@ function App () {
       y < coordKey[5].highY
     ) {
       //Get document for rectangle
-      console.log('rect');
+      checkData(5, x, y);
     } else {
       alert('Keep looking 👀');
+    }
+  };
+
+  const [itemValue] = useCollection(collection(db, 'items'));
+
+  const checkData = (index, x, y) => {
+    const { lowX, id, highX, highY, lowY, name } = itemValue.docs[index].data();
+    const notFoundYet = foundItems.indexOf(name) === -1;
+
+    const itemContDiv = document.getElementById(`${id}`);
+
+    //Validate again if x, y are within target range
+    if (lowX < x && x < highX && lowY < y && y < highY && notFoundYet) {
+      setFoundItems([...foundItems, name, id]);
+      itemContDiv.style.opacity = 0.4;
+    }
+  };
+
+  const checkGameEnd = () => {
+    if (foundItems.length === 10) {
+      setGameEnd(true);
     }
   };
 
