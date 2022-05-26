@@ -6,7 +6,7 @@ const Timer = ({ isGameStart, isGameEnd }) => {
   useEffect(() => {
     let interval = null;
 
-    if (isGameStart) {
+    if (isGameStart && !isGameEnd) {
       interval = setInterval(() => {
         setTime(prevTime => prevTime + 10);
       }, 10);

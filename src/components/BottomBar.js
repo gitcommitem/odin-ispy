@@ -46,7 +46,12 @@ const generatedItems = [];
 
 itemsList.forEach(item => {
   generatedItems.push(
-    <Item imgSrc={item.imgSrc} itemName={item.name} key={item.id} />
+    <Item
+      imgSrc={item.imgSrc}
+      itemName={item.name}
+      itemId={item.id}
+      key={item.id}
+    />
   );
 });
 
