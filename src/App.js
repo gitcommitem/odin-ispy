@@ -1,9 +1,11 @@
 import './styles/App.css';
+import React, { useState } from 'react';
+
 import gameImg from './imgs/game.jpg';
 import StartPrompt from './components/StartPrompt';
 import BottomBar from './components/BottomBar';
 import Cursor from './components/Cursor';
-import React, { useState } from 'react';
+import EndScreen from './components/EndScreen';
 
 import { initializeApp } from 'firebase/app';
 import { getFirestore, collection } from 'firebase/firestore';
@@ -34,6 +36,7 @@ function App () {
   const [isGameStart, setGameStart] = useState(false);
   const [isGameEnd, setGameEnd] = useState(false);
   const [foundItems, setFoundItems] = useState([]);
+  const [finalTime, setFinalTime] = useState('');
 
   const handleStartButtonClick = () => {
     setGameStart(true);
@@ -206,6 +209,35 @@ function App () {
     }
   };
 
+  //Switching classnames
+
+  const [isFadeOut, setisFadeOut] = useState(false);
+
+  const getImgClassName = () => {
+    if (isGameStart && !isGameEnd) {
+      return '';
+    } else if (isGameEnd) {
+      setTimeout(() => {
+        setisFadeOut(true);
+      }, 300);
+      return 'fade-out';
+    } else {
+      return 'blur';
+    }
+  };
+
+  const gameImgClass = getImgClassName();
+
+  const getGameContClassName = () => {
+    if (isFadeOut) {
+      return 'hidden';
+    } else {
+      return 'center';
+    }
+  };
+
+  const gameContClass = getGameContClassName();
+
   return (
     <div id="page-cont">
       <Cursor isGameStart={isGameStart} />
@@ -213,15 +245,16 @@ function App () {
         hidePrompt={isGameStart}
         handleButtonClick={handleStartButtonClick}
       />
-      <div className="center" id="game-cont">
+      <div className={gameContClass} id="game-cont">
         <img
           onClick={handleGameImgClick}
-          className={isGameStart ? '' : 'blur'}
+          className={gameImgClass}
           id="game"
           src={gameImg}
         />
       </div>
       <BottomBar isGameStart={isGameStart} isGameEnd={isGameEnd} />
+      <EndScreen />
     </div>
   );
 }

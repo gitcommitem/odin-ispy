@@ -7,6 +7,7 @@ div#bottom-bar {
   padding: 1rem 50vw;
   margin-left: -50vw;
   margin-right: -50vw;
+  transition: 0.3s ease;
 }
 
 div#item-cont {

@@ -56,8 +56,18 @@ itemsList.forEach(item => {
 });
 
 const BottomBar = ({ isGameStart, isGameEnd }) => {
+  const getBottomBarClass = () => {
+    if (isGameEnd) {
+      return 'hflex fade-out';
+    } else {
+      return 'hflex';
+    }
+  };
+
+  const bottomBarClass = getBottomBarClass();
+
   return (
-    <div className="hflex" id="bottom-bar">
+    <div className={bottomBarClass} id="bottom-bar">
       <div className="hflex" id="item-cont">
         {generatedItems}
       </div>

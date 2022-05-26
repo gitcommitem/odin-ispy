@@ -86,3 +86,8 @@ img#game {
 #game-cont {
   min-height: 100vh;
 }
+
+.fade-out {
+  filter: blur(1.2rem);
+  opacity: 0;
+}
