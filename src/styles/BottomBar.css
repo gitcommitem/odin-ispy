@@ -1,5 +1,4 @@
 div#bottom-bar {
-  justify-content: space-between;
   gap: 5rem;
   background-color: #fafafa;
   position: fixed;
@@ -12,4 +11,5 @@ div#bottom-bar {
 
 div#item-cont {
   gap: 1rem;
+  width: 75%;
 }

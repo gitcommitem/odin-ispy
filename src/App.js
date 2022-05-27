@@ -47,6 +47,7 @@ function App () {
     checkGameEnd();
   };
 
+  // Create hitbox areas for target items & check data against firestore
   const checkPosition = (x, y) => {
     const offset = 22;
 
@@ -167,18 +168,23 @@ function App () {
     }
   };
 
-  const [itemValue] = useCollection(collection(db, 'items'));
+  const [itemValue, loading] = useCollection(collection(db, 'items'));
 
   const checkData = (index, x, y) => {
-    const { lowX, id, highX, highY, lowY, name } = itemValue.docs[index].data();
-    const notFoundYet = foundItems.indexOf(name) === -1;
+    if (loading === false) {
+      const { lowX, id, highX, highY, lowY, name } = itemValue.docs[
+        index
+      ].data();
 
-    const itemContDiv = document.getElementById(`${id}`);
+      const notFoundYet = foundItems.indexOf(name) === -1;
 
-    //Validate again if x, y are within target range
-    if (lowX < x && x < highX && lowY < y && y < highY && notFoundYet) {
-      setFoundItems([...foundItems, name, id]);
-      itemContDiv.style.opacity = 0.4;
+      const itemContDiv = document.getElementById(`${id}`);
+
+      //Validate again if x, y are within target range
+      if (lowX < x && x < highX && lowY < y && y < highY && notFoundYet) {
+        setFoundItems([...foundItems, name, id]);
+        itemContDiv.style.opacity = 0.4;
+      }
     }
   };
 
@@ -187,11 +193,11 @@ function App () {
       setGameEnd(true);
       const endTime = document.querySelector('h1#timer').textContent;
       setFinalTime(endTime);
+      document.body.style.cursor = 'auto';
     }
   };
 
   //Switching classnames
-
   const [isFadeOut, setisFadeOut] = useState(false);
 
   const getImgClassName = () => {
@@ -221,7 +227,7 @@ function App () {
 
   return (
     <div id="page-cont">
-      <Cursor isGameStart={isGameStart} />
+      <Cursor isGameStart={isGameStart} isGameEnd={isGameEnd} />
       <StartPrompt
         hidePrompt={isGameStart}
         handleButtonClick={handleStartButtonClick}

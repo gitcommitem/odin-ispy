@@ -1,3 +1,4 @@
+import '../styles/EndScreen.css';
 import React, { useState } from 'react';
 import { collection, doc, updateDoc } from 'firebase/firestore';
 import { useCollection } from 'react-firebase-hooks/firestore';
@@ -5,7 +6,7 @@ import { db } from '../FirebaseConfig';
 
 const EndScreen = ({ isGameEnd, finalTime }) => {
   const [value, loading, error] = useCollection(collection(db, 'leaderboard'));
-  //Loading returns as true if still loading, false if data is retrieved
+  // Loading returns as true if still loading, false if data is retrieved
 
   const [scoreCheck, setScoreCheck] = useState(false);
 
@@ -23,7 +24,6 @@ const EndScreen = ({ isGameEnd, finalTime }) => {
       const slot4Time = value.docs[3].data().time;
 
       const slot5Score = value.docs[4].data().score;
-      const slot5Time = value.docs[4].data().time;
 
       const nextSlot = {
         slot1: 'slot2',
@@ -38,12 +38,12 @@ const EndScreen = ({ isGameEnd, finalTime }) => {
           (playerScore < score && scoreCheck === false) ||
           (score === 0 && scoreCheck === false)
         ) {
-          //Update document with player score and break loop
+          // Update document with player score and break loop
           const docRef = doc(db, 'leaderboard', slot.id);
           updateDoc(docRef, { score: playerScore, time: finalTime });
 
           if (score !== 0) {
-            //Need to update / shift all the previous scores if a new score gets updated
+            // Need to update / shift all the previous scores if a new score gets updated
             if (slot.id !== 'slot5') {
               const nextDocRef = doc(db, 'leaderboard', nextSlot[slot.id]);
               updateDoc(nextDocRef, { score: score, time: time });
@@ -85,16 +85,19 @@ const EndScreen = ({ isGameEnd, finalTime }) => {
           setScoreCheck(true);
           return false;
         } else {
-          //Check the rest of the scores against player score
+          // Check the rest of the scores against player score
           return true;
         }
       });
     }
   };
 
+  // Check player score against top5 scores
   (() => {
     if (scoreCheck === false) {
       const checkedScores = checkTopScores();
+
+      // If player score doesn't update any top 5 scores, stop score check on subsequent rerenders
       if (checkedScores === true) {
         setScoreCheck(true);
       }
@@ -114,12 +117,16 @@ const EndScreen = ({ isGameEnd, finalTime }) => {
   })();
 
   return (
-    <div className={isGameEnd ? 'center' : 'hidden'}>
+    <div className={isGameEnd ? 'center' : 'hidden'} id="end-screen">
       <div>
-        <h1>You found all items!</h1>
-        <h1>{finalTime}</h1>
-        <h1>Top 5</h1>
-        <ol>{top5}</ol>
+        <div id="result">
+          <h1>{finalTime}</h1>
+          <h1>🎉 You found all items! 🎉</h1>
+        </div>
+        <div id="leaderboard">
+          <h1>Top 5 Times</h1>
+          <ol>{top5}</ol>
+        </div>
       </div>
     </div>
   );

@@ -1,0 +1,18 @@
+div#end-screen {
+  min-height: 100vh;
+  text-align: center;
+}
+
+div#result {
+  margin-bottom: 2rem;
+}
+
+ol {
+  font-size: 2rem;
+  margin-top: 1rem;
+  font-variant-numeric: tabular-nums;
+}
+
+li {
+  margin-bottom: 1rem;
+}

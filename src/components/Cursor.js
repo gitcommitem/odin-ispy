@@ -1,11 +1,13 @@
 import '../styles/Cursor.css';
 import { useEffect } from 'react';
 
-const Cursor = ({ isGameStart }) => {
+const Cursor = ({ isGameStart, isGameEnd }) => {
   useEffect(() => {
-    addEventListeners();
-    return () => removeEventListeners();
-  }, []);
+    if (isGameStart === true && isGameEnd === false) {
+      addEventListeners();
+      return () => removeEventListeners();
+    }
+  }, [isGameStart, isGameEnd]);
 
   const addEventListeners = () => {
     document.addEventListener('mousemove', handleMouseMove);
@@ -51,7 +53,9 @@ const Cursor = ({ isGameStart }) => {
     cursor.style.opacity = '1';
   };
 
-  return <div className={isGameStart ? 'cursor' : 'hidden'}></div>;
+  return (
+    <div className={isGameStart && !isGameEnd ? 'cursor' : 'hidden'}></div>
+  );
 };
 
 export default Cursor;
