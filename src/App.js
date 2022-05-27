@@ -185,6 +185,8 @@ function App () {
   const checkGameEnd = () => {
     if (foundItems.length === 10) {
       setGameEnd(true);
+      const endTime = document.querySelector('h1#timer').textContent;
+      setFinalTime(endTime);
     }
   };
 
@@ -233,7 +235,7 @@ function App () {
         />
       </div>
       <BottomBar isGameStart={isGameStart} isGameEnd={isGameEnd} />
-      <EndScreen />
+      <EndScreen isGameEnd={isGameEnd} finalTime={finalTime} />
     </div>
   );
 }
