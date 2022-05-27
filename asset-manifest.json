@@ -1,0 +1,20 @@
+{
+  "files": {
+    "main.css": "/odin-ispy/static/css/main.31f1d257.css",
+    "main.js": "/odin-ispy/static/js/main.fc05769c.js",
+    "static/media/game.jpg": "/odin-ispy/static/media/game.2a523ad9023b9552252c.jpg",
+    "static/media/inter-v11-latin-regular.woff": "/odin-ispy/static/media/inter-v11-latin-regular.513f22e166bab984fa60.woff",
+    "static/media/inter-v11-latin-regular.woff2": "/odin-ispy/static/media/inter-v11-latin-regular.c96fe5ff771f9e7b53ab.woff2",
+    "static/media/item4.png": "/odin-ispy/static/media/item4.827d0ee6924d36593f64.png",
+    "static/media/item6.png": "/odin-ispy/static/media/item6.5eb458cb0f76af9a665c.png",
+    "static/media/item2.png": "/odin-ispy/static/media/item2.e126dfc86d6e9427f9d7.png",
+    "static/media/item1.png": "/odin-ispy/static/media/item1.d143cbcaaee3fa9580d6.png",
+    "index.html": "/odin-ispy/index.html",
+    "main.31f1d257.css.map": "/odin-ispy/static/css/main.31f1d257.css.map",
+    "main.fc05769c.js.map": "/odin-ispy/static/js/main.fc05769c.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.31f1d257.css",
+    "static/js/main.fc05769c.js"
+  ]
+}
